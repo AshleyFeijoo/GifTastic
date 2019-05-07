@@ -7,6 +7,14 @@ var celebArray = [
   "Bassnectar"
 ];
 
+toUpper = function(x){ 
+  return x.toUpperCase();
+};
+celebArray = celebArray.map(toUpper);
+console.log(celebArray);
+
+
+
 var gifName;
 let button = "";
 var newArr = {};
@@ -31,11 +39,21 @@ function createButtons(){
 };
 
 
+function clearForms()
+{
+    $(':input').not(':button, :submit, :reset, :hidden, :checkbox, :radio').val('');
+    $(':checkbox, :radio').prop('checked', false);
+};
 $("#submitBtn").one("click", function(){
-  $("#buttons-group").empty();
-  userInput = $("#search-input").val().trim();
+  // $("#buttons-group").empty();
+  userInput = $("#search-input").val();
+  var userInn = userInput.toUpperCase();
+  console.log(userInn);
   celebArray.push(userInput);
-  createButtons();
+  celebArray = celebArray.map(toUpper);
+  if (celebArray.indexOf(userInn) > -1){
+      createButtons();
+    }  clearForms();
 
   return false;
 });
@@ -60,8 +78,8 @@ function displayGifs(){
       response.data[i].images.fixed_height.url +
       '" data-state="still" class="gif pr-3 pt-3 pl-3" style= "width:250px; height:250px">';
       rating =response.data[i].rating;
-
-      $( '<figure id="outer">' +  selGif +  '<figcaption class=" text-center small">'+ 'rated: ' + rating +'</figcaption>' +'</figure>' ).prependTo( '#gifDiv');  
+     var l =  $( '<figure id="outer">' +  selGif +  '<figcaption class=" text-center small">'+ 'rated: ' + rating +'</figcaption>' +'</figure>' );
+   $( '#gifDiv').prepend(l);
     }
   });
 };
