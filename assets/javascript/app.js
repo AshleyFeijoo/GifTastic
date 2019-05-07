@@ -30,12 +30,13 @@ function createButtons(){
   }
 };
 
-$("#submitBtn").on("click", function(){
+
+$("#submitBtn").one("click", function(){
   $("#buttons-group").empty();
-  // $('gifs');
   userInput = $("#search-input").val().trim();
   celebArray.push(userInput);
   createButtons();
+
   return false;
 });
 
@@ -60,7 +61,7 @@ function displayGifs(){
       '" data-state="still" class="gif pr-3 pt-3 pl-3" style= "width:250px; height:250px">';
       rating =response.data[i].rating;
 
-      $( '<figure id="outer">' +  selGif +  '<figcaption class=" text-center small">'+ 'rated: ' + rating +'</figcaption>' +'</figure>' ).appendTo( '#gifDiv');  
+      $( '<figure id="outer">' +  selGif +  '<figcaption class=" text-center small">'+ 'rated: ' + rating +'</figcaption>' +'</figure>' ).prependTo( '#gifDiv');  
     }
   });
 };
